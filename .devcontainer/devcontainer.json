@@ -1,0 +1,44 @@
+{
+    "name": "docker_gui_test",
+    "build": {
+        "context": "..",
+        "dockerfile": "../Dockerfile"
+    },
+    "containerEnv": {
+        "DISPLAY": "unix:0",
+        "SHELL": "/bin/bash"
+    },
+    "runArgs": [
+        "--privileged",
+        "--gpus", "all",
+        "-v",
+        "/dev:/dev",
+        "--net=host",
+        "-e",
+        "DISPLAY=${env:DISPLAY}"
+    ],
+    "mounts": [
+        "source=/tmp/.X11-unix,target=/tmp/.X11-unix,type=bind,consistency=cached",
+        "source=/dev/dri,target=/dev/dri,type=bind,consistency=cached",
+    ],
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "cheshirekow.cmake-format",
+                "ms-azuretools.vscode-docker",
+                "ms-iot.vscode-ros",
+                "ms-python.black-formatter",
+                "ms-python.flake8",
+                "ms-python.isort",
+                "ms-python.pylint",
+                "ms-python.python",
+                "ms-toolsai.jupyter",
+                "ms-vscode.cmake-tools",
+                "ms-vscode.cpptools",
+                "ms-vscode.cpptools-extension-pack",
+                "xaver.clang-format",
+                "mutantdino.resourcemonitor"
+            ]
+        }
+    },
+}
